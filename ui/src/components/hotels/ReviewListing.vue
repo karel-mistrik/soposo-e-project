@@ -1,7 +1,7 @@
 <template>
   <v-row
     v-if="getReviews.length > 0"
-    class="justify-center"
+    class="justify-start"
   >
     <v-col cols="12">
       <span class="title">Recenze</span>
@@ -9,7 +9,8 @@
     <v-col
       v-for="review in getReviews"
       :key="review.id"
-      cols="4"
+      cols="12"
+      md="4"
     >
       <v-card
         class="card"
