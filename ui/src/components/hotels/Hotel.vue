@@ -54,12 +54,12 @@
               @click="redirect(room.RoomID)"
             >
               <v-img
-                src="@/assets/img1.jpg"
+                :src="room.Image"
                 class="white--text align-end"
                 gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                 height="200px"
               >
-                <v-card-title>Pokoj {{ room.RoomID }}</v-card-title>
+                <v-card-title>{{ room.Name }}</v-card-title>
               </v-img>
 
               <v-card-subtitle class="text--primary pb-0">

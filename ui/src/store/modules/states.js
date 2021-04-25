@@ -46,11 +46,12 @@ const actions = {
     commit('newUser', response.data);
     return true;
   },
-  async loginUser({ commit }, user) {
+  async loginUser({ commit, dispatch }, user) {
     const response = await api.post('/login', {
       ...user,
     });
     commit('currentUser', response.data);
+    dispatch('fetchHotels')
     return true;
   },
   async createHotel({ dispatch }, hotel) {
