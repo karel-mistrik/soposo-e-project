@@ -51,7 +51,6 @@ exports.update = async (req, res) => {
 		return { status: 400, message: 'Content can not be empty!' }
 	}
 
-	console.log(req)
 	const response = await Hotel.updateById(
 		req.HotelID,
 		new Hotel({
@@ -69,8 +68,7 @@ exports.delete = (req, res) => {
 		if (err) {
 			if (err.kind === 'not_found') {
 				res.status(404).send({
-					message: `Not found Hotel
-                with id ${req.params.hotelId}.`
+					message: `Hotel with id ${req.params.hotelId} not found.`
 				})
 			} else {
 				res.status(500).send({

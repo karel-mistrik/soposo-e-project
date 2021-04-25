@@ -35,7 +35,7 @@ router.post('/', upload.single('hotelImage'), async (req, res) => {
 	try {
 		const addressResponse = await address.create(req)
 
-		req.file = '';
+		req.file = ''
 		let formData = {
 			addressId: addressResponse.id,
 			hotelImage: req.file.path,
@@ -92,13 +92,11 @@ router.delete('/', hotels.deleteAll)
 
 router.post('/reviews', async (req, res) => {
 	try {
-		
 		let formData = {
 			date: moment().format('YYYY-MM-DD HH:mm'),
 			photo: '',
 			...req.body
 		}
-		console.log(formData)
 		review.create(formData, res)
 		//const reviewResponse = await review.create(formData)
 		// if (reviewResponse) {

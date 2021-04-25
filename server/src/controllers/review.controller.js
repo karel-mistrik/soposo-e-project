@@ -92,8 +92,7 @@ exports.delete = (req, res) => {
 		if (err) {
 			if (err.kind === 'not_found') {
 				res.status(404).send({
-					message: `Not found Review
-                with id ${req.params.reviewId}.`
+					message: `Review with id ${req.params.reviewId} not found.`
 				})
 			} else {
 				res.status(500).send({

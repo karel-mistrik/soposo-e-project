@@ -34,7 +34,7 @@ Hotel.findById = hotelId => {
 }
 
 Hotel.getAll = result => {
-	sql.query('SELECT * FROM hotel join address on hotel.AddressID = address.AddressID', (err, res) => {
+	sql.query('SELECT * FROM hotels_list', (err, res) => {
 		if (err) {
 			result(null, err)
 			return
@@ -61,15 +61,9 @@ Hotel.updateById = (id, hotel) => {
 }
 
 Hotel.remove = (id, result) => {
-	sql.query('DELETE FROM hotel WHERE HotelID = ?', id, (err, res) => {
+	sql.query('CALL delete_hotel(?)', id, (err, res) => {
 		if (err) {
 			result(null, err)
-			return
-		}
-
-		if (res.affectedRows == 0) {
-			// not found hotel with the id
-			result({ kind: 'not_found' }, null)
 			return
 		}
 
