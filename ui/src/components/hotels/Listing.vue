@@ -21,6 +21,7 @@
           >
             <v-card
               class="card"
+              min-height="400"
               @click="redirect(hotel.HotelID)"
             >
               <v-img

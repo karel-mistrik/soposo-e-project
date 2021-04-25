@@ -10,26 +10,16 @@
           width="100%"
           :height="carouselHeight"
           hide-delimiter-background
+          cycle
         >
           <v-carousel-item
-            src="@/assets/img1.jpg"
+            v-for="item in randomHotelsData"
+            :key="item.HotelID"
+            :src="item.Preview"
+            @click="redirect(item.HotelID)"
           >
             <div class="fill-height dimmer d-flex align-center justify-center">
-              <span class="display-3">Hotel 1</span>
-            </div>
-          </v-carousel-item>
-          <v-carousel-item
-            src="@/assets/img2.jpg"
-          >
-            <div class="fill-height dimmer d-flex align-center justify-center">
-              <span class="display-3">Hotel 2</span>
-            </div>
-          </v-carousel-item>
-          <v-carousel-item
-            src="@/assets/img3.jpg"
-          >
-            <div class="fill-height dimmer d-flex align-center justify-center">
-              <span class="display-3">Hotel 3</span>
+              <span class="display-3">{{ item.Name }}</span>
             </div>
           </v-carousel-item>
           <v-carousel />
@@ -41,6 +31,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
 import SearchBar from './SearchBar.vue';
 
 export default {
@@ -48,18 +39,35 @@ export default {
   components: { SearchBar },
   data() {
     return {
+      randomHotelsData: this.randomHotels,
       carouselHeight: window.innerHeight - 250,
     }
   },
-  created() {
+  computed: {
+    ...mapState(['states']),
+  },
+  async created() {
     window.addEventListener('resize', this.variableHeight);
+    await this.fetchHotels()
+    await this.randomHotels()
   },
   destroyed() {
     window.removeEventListener('resize', this.variableHeight);
   },
   methods: {
+    ...mapActions(['fetchHotels']),
     variableHeight() {
       this.carouselHeight = window.innerHeight - 250;
+    },
+    randomHotels() {
+      const array = []
+      for (let i = 0; i < 3; i++) {
+        array.push(this.states.hotels[Math.floor(Math.random() * this.states.hotels.length)])
+      }
+      this.randomHotelsData = array;
+    },
+    redirect(id) {
+      this.$router.push({ name: 'hotel', params: { id } })
     },
   },
 };
