@@ -1,0 +1,10 @@
+/* if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+} */
+
+module.exports = {
+    HOST: process.env.DATABASE_HOST,
+    USER: process.env.DATABASE_USER,
+    PASSWORD: process.env.DATABASE_PASSWORD,
+    DB: process.env.DATABASE_DB
+};

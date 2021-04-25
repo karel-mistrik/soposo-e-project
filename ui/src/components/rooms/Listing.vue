@@ -1,0 +1,88 @@
+<template>
+  <v-container>
+    <Title title="Pokoje" />
+    <v-row
+      class="justify-center"
+    >
+      <v-col
+        v-for="room in filterRooms()"
+        :key="room.RoomID"
+        cols="12"
+        md="3"
+      >
+        <v-card
+          class="card"
+          @click="redirect(room.RoomID)"
+        >
+          <v-img
+            src="@/assets/img1.jpg"
+            class="white--text align-end"
+            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+            height="200px"
+          >
+            <v-card-title>Pokoj {{ room.RoomID }}</v-card-title>
+          </v-img>
+
+          <v-card-subtitle class="text--primary pb-0">
+            Počet hostů: {{ room.Capacity }}
+          </v-card-subtitle>
+
+          <v-card-text class="text--primary">
+            <div class="line-clamp">
+              {{ room.Description }}
+            </div>
+          </v-card-text>
+
+          <v-card-subtitle class="text--primary">
+            Cena: <span class="font-weight-bold">
+              {{ sumInCrowns(room.Price) }}
+            </span>
+          </v-card-subtitle>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script>
+import { mapActions, mapGetters } from 'vuex';
+import Title from '../layout/Title.vue';
+
+export default {
+  name: 'RoomListing',
+  components: {
+    Title,
+  },
+  data() {
+    return {
+      rooms: null,
+      filteredRoomss: [],
+    }
+  },
+  computed: {
+    ...mapGetters(['allRooms']),
+  },
+  async created() {
+    this.rooms = await this.fetchRooms()
+    this.filterRooms()
+  },
+  methods: {
+    ...mapActions(['fetchRooms']),
+    redirect(id) {
+      this.$router.push({ name: 'roomReservation', params: { id } });
+    },
+    filterRooms() {
+      if (this.$route.params.restrictedHotels && this.rooms) {
+        // eslint-disable-next-line max-len
+        const filtredrooms = this.rooms.filter(({ RoomID: id1 }) => !this.$route.params.restrictedHotels.some(({ RoomID: id2 }) => id2 === id1))
+        return filtredrooms.filter((room) => room.Capacity >= this.$route.params.capacity)
+      }
+      return this.rooms
+    },
+  },
+}
+</script>
+
+<style>
+
+</style>
