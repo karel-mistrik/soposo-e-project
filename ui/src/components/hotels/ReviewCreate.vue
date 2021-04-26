@@ -44,21 +44,10 @@
               rules="required|alpha_spaces"
               name="nazev"
             >
-              <v-text-field
+              <v-textarea
                 v-model="review.text"
+                auto-grow
                 label="Obsah recenze"
-                :error-messages="errors[0]"
-              />
-            </validation-provider>
-
-            <validation-provider
-              v-slot="{ errors }"
-              rules="required"
-              name="odkaz na obrazek"
-            >
-              <v-text-field
-                v-model="review.photo"
-                label="Odkaz na obrazek"
                 :error-messages="errors[0]"
               />
             </validation-provider>

@@ -34,7 +34,7 @@
             </div>
             <div>
               <span class="subtitle-1">
-                {{ certainHotel.Country }}, {{ certainHotel.Region }}
+                {{ certainHotel.City }}
               </span>
             </div>
             <div>
