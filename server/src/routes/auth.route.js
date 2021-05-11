@@ -5,6 +5,7 @@ const moment = require('moment')
 const contact = require('../controllers/contact.controller')
 const customer = require('../controllers/customer.controller')
 const passport = require('passport')
+const jwt = require('jsonwebtoken');
 
 router.get('/login', (req, res) => {
 	res.send('Login')
@@ -19,7 +20,7 @@ router.get('/register', (req, res) => {
 });
  */
 router.post('/login', passport.authenticate('local'), (req, res) => {
-	res.status(200).send(res.req.user)
+	res.status(200).send({ ...res.req.user })
 })
 
 router.post('/register', async (req, res) => {

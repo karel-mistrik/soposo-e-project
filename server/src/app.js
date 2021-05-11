@@ -35,7 +35,7 @@ app.use(
 		saveUninitialized: false
 	})
 )
-app.use('/api/hotels', hotelsRouter)
+app.use('/api/hotels', passport.authenticate('jwt', { session: false }), hotelsRouter)
 app.use('/api/customers', customerRouter)
 app.use('/', authRouter)
 app.use('/api/rooms', roomRouter)

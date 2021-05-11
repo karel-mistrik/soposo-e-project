@@ -5,13 +5,14 @@ import api from '@/api';
 const state = {
   hotels: [],
   hotel: {},
-  user: null,
+  user: JSON.parse(localStorage.getItem('user')) || null,
   users: [],
   rooms: [],
   room: {},
   filteredHotels: [],
   reservation: {},
   reviews: [],
+  token: localStorage.getItem('token') || null,
 };
 
 const getters = {
@@ -28,7 +29,7 @@ const getters = {
 
 const actions = {
   async fetchHotels({ commit }) {
-    const response = await api.get('/api/hotels');
+    const response = await api.get(`/api/hotels?secret_token=${state.token}`);
     commit('setHotels', response.data);
     commit('setFilteredHotels', response.data)
   },
@@ -50,7 +51,9 @@ const actions = {
     const response = await api.post('/login', {
       ...user,
     });
-    commit('currentUser', response.data);
+    commit('currentUser', response.data.user);
+    localStorage.setItem('token', response.data.token)
+    localStorage.setItem('user', JSON.stringify(response.data.user))
     dispatch('fetchHotels')
     return true;
   },
