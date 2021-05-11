@@ -21,7 +21,7 @@
           >
             <v-card
               class="card"
-              min-height="400"
+              height="400"
               @click="redirect(hotel.HotelID)"
             >
               <v-img
@@ -35,6 +35,15 @@
 
               <v-card-subtitle class="pb-0">
                 {{ hotel.City }}
+              </v-card-subtitle>
+              <v-card-subtitle class="py-0 px-2 d-flex">
+                <v-rating
+                  v-model="hotel.AverageStars"
+                  background-color="primary"
+                  color="primary"
+                  readonly
+                  medium
+                />
               </v-card-subtitle>
 
               <v-card-subtitle class="pt-0">
@@ -173,7 +182,7 @@ export default {
 
 .line-clamp {
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

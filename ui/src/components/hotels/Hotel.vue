@@ -2,7 +2,8 @@
   <v-container>
     <v-row class="justify-center">
       <v-col
-        cols="8"
+        md="8"
+        cols="12"
       >
         <v-row class="justify-center">
           <v-col
@@ -33,7 +34,7 @@
             </div>
             <div>
               <span class="subtitle-1">
-                {{ certainHotel.Country }}, {{ certainHotel.Region }}
+                {{ certainHotel.City }}
               </span>
             </div>
             <div>
@@ -47,7 +48,8 @@
           <v-col
             v-for="room in allRooms"
             :key="room.RoomID"
-            cols="4"
+            cols="12"
+            md="4"
           >
             <v-card
               class="card"
