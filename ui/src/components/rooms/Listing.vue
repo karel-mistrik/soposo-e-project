@@ -38,6 +38,34 @@
               {{ sumInCrowns(room.Price) }}
             </span>
           </v-card-subtitle>
+          <div
+            v-if="isAdmin"
+            class="delete-wrapper"
+          >
+            <v-btn
+              color="secondary"
+              class="mx-2"
+              fab
+              dark
+              x-small
+            >
+              <v-icon>mdi-delete</v-icon>
+            </v-btn>
+          </div>
+          <div
+            v-if="isAdmin"
+            class="edit-wrapper"
+          >
+            <v-btn
+              color="accent"
+              class="mx-2"
+              fab
+              dark
+              x-small
+            >
+              <v-icon>mdi-circle-edit-outline</v-icon>
+            </v-btn>
+          </div>
         </v-card>
       </v-col>
     </v-row>
@@ -60,7 +88,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['allRooms']),
+    ...mapGetters(['allRooms', 'loggedUser']),
+    isAdmin() {
+      return this.loggedUser ? this.loggedUser.Access === 'admin' : false
+    },
   },
   async created() {
     this.rooms = await this.fetchRooms()
@@ -84,5 +115,17 @@ export default {
 </script>
 
 <style>
+    .delete-wrapper{
+      position: absolute;
+      right: -22px;
+      top: -15px;
+      z-index: 1;
+    }
 
+    .edit-wrapper{
+      position: absolute;
+      right: -22px;
+      top: 25px;
+      z-index: 1;
+    }
 </style>

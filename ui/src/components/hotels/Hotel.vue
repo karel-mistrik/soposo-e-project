@@ -79,6 +79,34 @@
                   {{ sumInCrowns(room.Price) }}
                 </span>
               </v-card-subtitle>
+              <div
+                v-if="isAdmin"
+                class="delete-wrapper"
+              >
+                <v-btn
+                  color="secondary"
+                  class="mx-2"
+                  fab
+                  dark
+                  x-small
+                >
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
+              </div>
+              <div
+                v-if="isAdmin"
+                class="edit-wrapper"
+              >
+                <v-btn
+                  color="accent"
+                  class="mx-2"
+                  fab
+                  dark
+                  x-small
+                >
+                  <v-icon>mdi-circle-edit-outline</v-icon>
+                </v-btn>
+              </div>
             </v-card>
           </v-col>
         </v-row>
@@ -120,8 +148,11 @@ export default {
     ReviewListing,
   },
   computed: {
-    ...mapGetters(['certainHotel', 'allRooms']),
+    ...mapGetters(['certainHotel', 'allRooms', 'loggedUser']),
     ...mapState(['states']),
+    isAdmin() {
+      return this.loggedUser ? this.loggedUser.Access === 'admin' : false
+    },
   },
   watch: {
 
@@ -153,8 +184,22 @@ export default {
     }
 
     .add-wrapper{
-  position: fixed;
-  right: 32px;
-  bottom: 32px;
-}
+      position: fixed;
+      right: 32px;
+      bottom: 32px;
+    }
+
+    .delete-wrapper{
+      position: absolute;
+      right: -22px;
+      top: -15px;
+      z-index: 1;
+    }
+
+    .edit-wrapper{
+      position: absolute;
+      right: -22px;
+      top: 25px;
+      z-index: 1;
+    }
 </style>
