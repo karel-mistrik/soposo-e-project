@@ -97,6 +97,7 @@
 
         <v-list-item
           v-if="isAdmin"
+          :to="{ name: 'users' }"
         >
           <v-list-item-avatar>
             <v-icon size="25">
@@ -111,7 +112,9 @@
 
         <v-divider />
 
-        <v-list-item>
+        <v-list-item
+          v-if="isAdmin"
+        >
           <v-list-item-avatar>
             <v-icon size="25">
               mdi-book

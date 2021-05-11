@@ -12,6 +12,8 @@ import RoomListing from '../components/rooms/Listing';
 import RoomReservation from '../components/rooms/Reservation';
 import ReservationConfirmation from '../components/rooms/ReservationConfirmation';
 import ReviewCreate from '../components/hotels/ReviewCreate';
+import PageUsers from '../components/PageUsers.vue';
+import PageReviews from '../components/PageReviews.vue';
 
 const user = store;
 
@@ -85,6 +87,18 @@ const router = new Router({
       name: 'reviewCreate',
       component: ReviewCreate,
       props: { policy: ['admin', 'user'] },
+    },
+    {
+      path: '/customers',
+      name: 'users',
+      component: PageUsers,
+      props: { policy: ['admin'] },
+    },
+    {
+      path: '/reviews',
+      name: 'reviews',
+      component: PageReviews,
+      props: { policy: ['admin'] },
     },
   ],
 })

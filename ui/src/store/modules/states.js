@@ -130,10 +130,13 @@ const actions = {
     dispatch('fetchReviews', state.hotel.HotelID)
   },
   async deleteRoomByHotel({ dispatch }, roomId) {
-    console.log(roomId)
-    console.log(state.hotel.HotelID)
     await api.delete(`/api/rooms/${roomId}`);
     dispatch('fetchRoomsByHotelId', state.hotel.HotelID)
+  },
+  async fetchAllReviews({ commit }) {
+    const response = await api.get('/api/hotels/reviews');
+    console.log(response.data)
+    commit('setReviews', response.data);
   },
 };
 
