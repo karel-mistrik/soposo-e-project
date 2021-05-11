@@ -89,6 +89,7 @@
                   fab
                   dark
                   x-small
+                  @click.stop="deleteRoom(room.RoomID)"
                 >
                   <v-icon>mdi-delete</v-icon>
                 </v-btn>
@@ -163,9 +164,12 @@ export default {
     await this.fetchRoomsByHotelId(this.$route.params.id);
   },
   methods: {
-    ...mapActions(['setHotel', 'fetchRoomsByHotelId', 'fetchRooms']),
+    ...mapActions(['setHotel', 'fetchRoomsByHotelId', 'fetchRooms', 'deleteRoomByHotel']),
     redirect(id) {
       this.$router.push({ name: 'roomReservation', params: { id } });
+    },
+    async deleteRoom(id) {
+      await this.deleteRoomByHotel(id);
     },
   },
 }

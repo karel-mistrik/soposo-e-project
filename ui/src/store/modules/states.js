@@ -129,6 +129,12 @@ const actions = {
     await api.delete(`/api/hotels/reviews/${reviewId}`);
     dispatch('fetchReviews', state.hotel.HotelID)
   },
+  async deleteRoomByHotel({ dispatch }, roomId) {
+    console.log(roomId)
+    console.log(state.hotel.HotelID)
+    await api.delete(`/api/rooms/${roomId}`);
+    dispatch('fetchRoomsByHotelId', state.hotel.HotelID)
+  },
 };
 
 const mutations = {
