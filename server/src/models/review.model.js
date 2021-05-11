@@ -46,13 +46,14 @@ Review.findByHotelId = hotelId => {
 	})
 }
 
-Review.getAll = result => {
-	sql.query('SELECT * FROM Review join customer on  Review.CustomerID = customer.CustomerID', (err, res) => {
-		if (err) {
-			result(null, err)
-			return
-		}
-		result(null, res)
+Review.getAll = () => {
+	return new Promise((resolve, reject) => {
+		sql.query(`SELECT * FROM Review join customer on  Review.CustomerID = customer.CustomerID`, (err, res) => {
+			if (err) {
+				reject(err)
+			}
+			resolve(res)
+		})
 	})
 }
 

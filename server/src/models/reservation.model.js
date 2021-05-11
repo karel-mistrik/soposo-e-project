@@ -55,6 +55,17 @@ Reservation.getAll = result => {
 	})
 }
 
+Reservation.findAllByUserId = userId => {
+	return new Promise((resolve, reject) => {
+		sql.query(`SELECT * FROM reservation WHERE CustomerID = ${userId}`, (err, res) => {
+			if (err) {
+				reject(err)
+			}
+			resolve(res)
+		})
+	})
+}
+
 Reservation.updateById = (id, reservation) => {
 	return new Promise((resolve, reject) => {
 		sql.query('UPDATE reservation SET status = ? WHERE ReservationID = ?', [reservation, id], (err, res) => {

@@ -33,6 +33,11 @@ exports.findOne = async id => {
 	return response
 }
 
+exports.findAllByUserId = async userId => {
+	const response = await Reservation.findAllByUserId(userId)
+	return response
+}
+
 exports.update = async req => {
 	// Validate Request
 	if (!req) {

@@ -64,6 +64,19 @@ router.put('/:reservationId', async (req, res) => {
 	}
 })
 
+router.get('/user/:userId', async (req, res) => {
+	try {
+		const reservationResponse = await reservation.findAllByUserId(req.params.userId)
+		if (reservationResponse) {
+			res.status(200).send(reservationResponse)
+		} else {
+			res.status(400).send({ message: `No reservations found for user with id: ${req.params.userId}` })
+		}
+	} catch (error) {
+		res.status(500).send({ message: 'Some error occurred while search for reservation' })
+	}
+})
+
 router.delete('/:reservationId', reservation.delete)
 
 router.delete('/', reservation.deleteAll)

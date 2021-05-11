@@ -109,7 +109,18 @@ router.post('/reviews', async (req, res) => {
 	}
 })
 
-router.get('/reviews', review.findAll)
+router.get('/all/reviews', async (req, res) => {
+	try {
+		const response = await review.findAll()
+		if (response) {
+			res.status(200).send(response)
+		} else {
+			res.status(400).send({ message: `No reviews found` })
+		}
+	} catch (error) {
+		res.status(500).send({ message: 'Some error occurred while searching for a reviews' })
+	}
+})
 
 router.get('/:hotelId/reviews', async (req, res) => {
 	try {

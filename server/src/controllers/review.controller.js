@@ -42,16 +42,19 @@ exports.create = (req, res) => {
 	})
 }
 
-exports.findAll = (req, res) => {
-	Review.getAll((err, data) => {
-		if (err) {
-			res.status(500).send({
-				message: err.message || 'Some error occurred while retrieving reviews.'
-			})
-		} else {
-			res.send(data)
-		}
-	})
+exports.findAll = async () => {
+	const response = await Review.getAll()
+	return response
+	//console.log(res)
+	// Review.getAll((err, data) => {
+	// 	if (err) {
+	// 		res.status(500).send({
+	// 			message: err.message || 'Some error occurred while retrieving reviews.'
+	// 		})
+	// 	} else {
+	// 		res.send(data)
+	// 	}
+	// })
 }
 
 exports.findAllByHotelId = async id => {
