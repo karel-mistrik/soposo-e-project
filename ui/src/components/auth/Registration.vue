@@ -157,7 +157,7 @@ export default {
       if (isValid) {
         await this.registerUser(this.user);
         await this.$router.push({ name: 'login' })
-        this.saveDetails('Registrován/a!', 'accent', 1000)
+        await this.saveDetails('Registrován/a!', 'accent', 1000)
       }
     },
   },

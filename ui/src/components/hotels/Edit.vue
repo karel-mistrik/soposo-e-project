@@ -54,9 +54,10 @@
               rules="required|alpha_spaces"
               name="zeme"
             >
-              <v-text-field
+              <v-select
                 v-model="hotel.Country"
                 label="Zeme"
+                :items="['Česká Republika']"
                 :error-messages="errors[0]"
               />
             </validation-provider>
@@ -155,7 +156,9 @@ export default {
   },
   data() {
     return {
-      hotel: {},
+      hotel: {
+        Country: 'Česká Republika',
+      },
     }
   },
   computed: {
@@ -165,6 +168,8 @@ export default {
   created() {
     this.setHotel(this.$route.params.id)
     this.hotel = { ...this.states.hotel }
+    this.hotel.Country = 'Česká Republika'
+    console.log(this.hotel)
   },
   methods: {
     ...mapActions(['setHotel', 'editHotel']),
