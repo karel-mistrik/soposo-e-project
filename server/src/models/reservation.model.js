@@ -46,8 +46,7 @@ Reservation.findById = reservationId => {
 
 Reservation.getAll = result => {
 	sql.query(
-		`
-		select reservation.Enddate, reservation.Startdate, reservation.Numberofguests, reservation.Price, reservation.Status,
+		`select reservation.ReservationID, reservation.Enddate, reservation.Startdate, reservation.Numberofguests, reservation.Price, reservation.Status,
 		contact.name as contactName, contact.surname, contact.email, roomtype.description, Payment.type, hotel.name, address.street, address.apt, address.city 
 		from reservation 
 		join customer on reservation.CustomerID = customer.CustomerID
@@ -70,12 +69,25 @@ Reservation.getAll = result => {
 
 Reservation.findAllByUserId = userId => {
 	return new Promise((resolve, reject) => {
-		sql.query(`SELECT * FROM reservation WHERE CustomerID = ${userId}`, (err, res) => {
-			if (err) {
-				reject(err)
+		sql.query(
+			`select reservation.ReservationID, reservation.Enddate, reservation.Startdate, reservation.Numberofguests, reservation.Price, reservation.Status,
+		contact.name as contactName, contact.surname, contact.email, roomtype.description, Payment.type, hotel.name, address.street, address.apt, address.city 
+		from reservation 
+		join customer on reservation.CustomerID = customer.CustomerID
+		join contact on customer.contactID = contact.contactID
+		join room on reservation.RoomID = room.RoomID
+		join roomtype on room.RoomtypeID = roomtype.RoomtypeID
+		join Payment on reservation.PaymentID = Payment.PaymentID
+		join hotel on room.HotelID = hotel.HotelID
+		join address on hotel.AddressID = address.AddressID
+		WHERE CustomerID = ${userId}`,
+			(err, res) => {
+				if (err) {
+					reject(err)
+				}
+				resolve(res)
 			}
-			resolve(res)
-		})
+		)
 	})
 }
 
