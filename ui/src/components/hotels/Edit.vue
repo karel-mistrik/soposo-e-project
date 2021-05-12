@@ -30,7 +30,7 @@
               name="nazev"
             >
               <v-text-field
-                v-model="hotel.Name"
+                v-model="hotel.name"
                 label="Název"
                 :error-messages="errors[0]"
               />
@@ -42,7 +42,7 @@
               name="popis"
             >
               <v-textarea
-                v-model="hotel.Description"
+                v-model="hotel.description"
                 auto-grow
                 label="Popis"
                 :error-messages="errors[0]"
@@ -54,9 +54,10 @@
               rules="required|alpha_spaces"
               name="zeme"
             >
-              <v-text-field
-                v-model="hotel.Country"
+              <v-select
+                v-model="hotel.country"
                 label="Zeme"
+                :items="['Česká Republika']"
                 :error-messages="errors[0]"
               />
             </validation-provider>
@@ -66,7 +67,7 @@
               name="zeme"
             >
               <v-text-field
-                v-model="hotel.Region"
+                v-model="hotel.region"
                 label="Region"
                 :error-messages="errors[0]"
               />
@@ -77,7 +78,7 @@
               name="mesto"
             >
               <v-text-field
-                v-model="hotel.City"
+                v-model="hotel.city"
                 label="Mesto"
                 :error-messages="errors[0]"
               />
@@ -88,7 +89,7 @@
               name="ulice"
             >
               <v-text-field
-                v-model="hotel.Street"
+                v-model="hotel.street"
                 label="Ulice"
                 :error-messages="errors[0]"
               />
@@ -99,7 +100,7 @@
               name="cislo popisne"
             >
               <v-text-field
-                v-model="hotel.Apt"
+                v-model="hotel.apt"
                 label="Cislo popisne"
                 :error-messages="errors[0]"
               />
@@ -110,7 +111,7 @@
               name="psc"
             >
               <v-text-field
-                v-model="hotel.Zip"
+                v-model="hotel.zip"
                 label="PSC"
                 :error-messages="errors[0]"
               />
@@ -121,7 +122,7 @@
               name="odkaz na obrazek"
             >
               <v-text-field
-                v-model="hotel.Preview"
+                v-model="hotel.preview"
                 label="Odkaz na obrazek"
                 :error-messages="errors[0]"
               />
@@ -160,11 +161,23 @@ export default {
   },
   computed: {
     ...mapGetters(['certainHotel']),
-    ...mapState(['states']),
+    ...mapState(['hotels']),
   },
   created() {
     this.setHotel(this.$route.params.id)
-    this.hotel = { ...this.states.hotel }
+    this.hotel = {
+      addressId: this.hotels.hotel.AddressID,
+      apt: this.hotels.hotel.Apt,
+      city: this.hotels.hotel.City,
+      country: this.hotels.hotel.Country,
+      description: this.hotels.hotel.Description,
+      hotelId: this.hotels.hotel.HotelID,
+      name: this.hotels.hotel.Name,
+      preview: this.hotels.hotel.Preview,
+      region: this.hotels.hotel.Region,
+      street: this.hotels.hotel.Street,
+      zip: this.hotels.hotel.Zip,
+    }
   },
   methods: {
     ...mapActions(['setHotel', 'editHotel']),

@@ -30,7 +30,7 @@
           ref="picker"
           v-model="date"
           range
-          min="1950-01-01"
+          :min="getToday"
         />
       </v-menu>
     </v-col>

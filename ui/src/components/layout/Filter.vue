@@ -45,19 +45,19 @@ export default {
     }
   },
   computed: {
-    ...mapState(['states']),
+    ...mapState(['hotels']),
   },
   watch: {
     name(value) {
-      const newHotels = this.states.hotels.filter((hotel) => hotel.Name.toLowerCase()
+      const newHotels = this.hotels.hotels.filter((hotel) => hotel.Name.toLowerCase()
         .includes(value.toLowerCase()));
       this.updateHotels(newHotels);
     },
     region(value) {
       if (value === 'Kterýkoliv') {
-        this.updateHotels(this.states.hotels);
+        this.updateHotels(this.hotels.hotels);
       } else {
-        const newHotels = this.states.hotels.filter((hotel) => hotel.Region === value);
+        const newHotels = this.hotels.hotels.filter((hotel) => hotel.Region === value);
         this.updateHotels(newHotels);
       }
     },
