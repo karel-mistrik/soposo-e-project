@@ -63,7 +63,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['certainHotel', 'allUsers', 'getReviews', 'loggedUser']),
+    ...mapGetters(['certainHotel', 'getAllUsers', 'getReviews', 'loggedUser']),
     isAdmin() {
       return this.loggedUser ? this.loggedUser.Access === 'admin' : false
     },
@@ -75,7 +75,7 @@ export default {
   methods: {
     ...mapActions(['fetchUsers', 'fetchReviews', 'deleteReview']),
     getAuthor(id) {
-      const author = this.allUsers.filter((user) => user.CustomerID === id);
+      const author = this.getAllUsers.filter((user) => user.CustomerID === id);
       return author[0].Alias;
     },
     async deleteReviewCall(review) {
