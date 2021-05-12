@@ -39,7 +39,7 @@
           ref="picker"
           v-model="reservation.date"
           range
-          min="1950-01-01"
+          :min="getToday"
         />
       </v-menu>
       <validation-provider

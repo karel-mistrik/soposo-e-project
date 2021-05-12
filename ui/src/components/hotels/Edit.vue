@@ -156,9 +156,7 @@ export default {
   },
   data() {
     return {
-      hotel: {
-        Country: 'Česká Republika',
-      },
+      hotel: {},
     }
   },
   computed: {
@@ -168,8 +166,6 @@ export default {
   created() {
     this.setHotel(this.$route.params.id)
     this.hotel = { ...this.hotels.hotel }
-    this.hotel.Country = 'Česká Republika'
-    console.log(this.hotel)
   },
   methods: {
     ...mapActions(['setHotel', 'editHotel']),

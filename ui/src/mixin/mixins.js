@@ -22,4 +22,9 @@ export default {
       return moment(date).format('DD. MM. YYYY')
     },
   },
+  computed: {
+    getToday() {
+      return moment().format('YYYY-MM-DD');
+    },
+  },
 };

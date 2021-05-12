@@ -126,6 +126,19 @@
           </v-list-item-content>
         </v-list-item>
         <v-divider />
+
+        <v-list-item @click="logout()">
+          <v-list-item-avatar>
+            <v-icon size="25">
+              mdi-logout
+            </v-icon>
+          </v-list-item-avatar>
+
+          <v-list-item-content>
+            <v-list-item-title>Odhlásit se</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider />
       </v-list>
     </v-navigation-drawer>
   </v-app-bar>
@@ -151,6 +164,13 @@ export default {
   },
   created() {
     console.log(this.currentUser)
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.reload();
+    },
   },
 };
 </script>
