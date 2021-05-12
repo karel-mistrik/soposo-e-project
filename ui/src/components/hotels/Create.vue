@@ -116,17 +116,16 @@
                 :error-messages="errors[0]"
               />
             </validation-provider>
-            <validation-provider
-              v-slot="{ errors }"
-              rules="required|url"
-              name="odkaz na obrazek"
+            <img
+              :src="hotel.preview"
+              alt="card_image"
             >
-              <v-text-field
-                v-model="hotel.preview"
-                label="Odkaz na obrazek"
-                :error-messages="errors[0]"
-              />
-            </validation-provider>
+            <input
+              class="custom-input"
+              type="file"
+              accept="image/*"
+              @change="handleImage"
+            >
             <v-row>
               <v-col>
                 <v-btn
@@ -156,6 +155,9 @@ export default {
   },
   data() {
     return {
+
+      remoteUrl: '',
+
       hotel: {
         name: '',
         description: '',
@@ -167,6 +169,7 @@ export default {
         zip: '',
         adressID: '',
         preview: '',
+        hotelImage: '',
       },
       regions: [
         'Pardubický kraj',
@@ -186,6 +189,26 @@ export default {
     }
   },
   methods: {
+    handleImage(e) {
+      const selectedImage = e.target.files[0]; // get first file
+      this.createBase64Image(selectedImage);
+    },
+    createBase64Image(fileObject) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        this.hotel.preview = e.target.result;
+        this.uploadImage();
+      };
+      reader.readAsDataURL(fileObject);
+    },
+    uploadImage() {
+      // axios.post('http://127.0.0.1:8081/upload', { image })
+      //   .then((response) => {
+      //     this.remoteUrl = response.data.url;
+      //   })
+      //   .catch((err) => new Error(err.message))
+    },
     ...mapActions(['createHotel']),
     async onSubmit() {
       const isValid = await this.$refs.createForm.validate()
