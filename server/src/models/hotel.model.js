@@ -7,6 +7,7 @@ const Hotel = function (hotel) {
 	this.description = hotel.description
 	this.addressID = hotel.addressID
 	this.preview = hotel.preview
+	this.hotelImage = hotel.hotelImage
 }
 
 Hotel.create = (newHotel, result) => {

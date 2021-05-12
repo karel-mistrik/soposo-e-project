@@ -48,7 +48,7 @@ Customer.findByEmail = customerEmail => {
 }
 
 Customer.getAll = result => {
-	sql.query('SELECT * FROM customer join contact on customer.ContactID = contact.ContactID', (err, res) => {
+	sql.query('SELECT * FROM all_users', (err, res) => {
 		if (err) {
 			result(null, err)
 			return
