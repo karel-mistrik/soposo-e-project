@@ -28,9 +28,10 @@ const actions = {
     commit('setRooms', hotelRooms);
     return true;
   },
-  async deleteRoomByHotel({ dispatch }, roomId) {
-    await api.delete(`/api/rooms/${roomId}`);
-    dispatch('fetchRoomsByHotelId', state.hotel.HotelID)
+  async deleteRoomByHotel({ dispatch }, room) {
+    await api.delete(`/api/rooms/${room.RoomID}`);
+    await dispatch('fetchRooms');
+    dispatch('fetchRoomsByHotelId', room.HotelID);
   },
 };
 

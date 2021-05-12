@@ -89,7 +89,7 @@
                   fab
                   dark
                   x-small
-                  @click.stop="deleteRoom(room.RoomID)"
+                  @click.stop="deleteRoom(room)"
                 >
                   <v-icon>mdi-delete</v-icon>
                 </v-btn>
@@ -168,8 +168,8 @@ export default {
     redirect(id) {
       this.$router.push({ name: 'roomReservation', params: { id } });
     },
-    async deleteRoom(id) {
-      await this.deleteRoomByHotel(id);
+    async deleteRoom(room) {
+      await this.deleteRoomByHotel(room);
     },
   },
 }

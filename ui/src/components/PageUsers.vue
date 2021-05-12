@@ -3,32 +3,53 @@
     <Title title="Uživatelé" />
     <v-row>
       <v-col
-        v-for="user in allUsers"
+        v-for="user in getAllUsers"
         :key="user.CustomerID"
+        cols="3"
       >
         <v-card>
-          <v-card-title primary-title>
-            <div>
-              <h3 class="headline mb-0">
+          <v-list>
+            <v-list-item>
+              <v-list-item-content>
                 {{ user.Alias }}
-              </h3>
-              <div>description</div>
-            </div>
-          </v-card-title>
-          <v-card-actions>
-            <v-btn
-              flat
-              color="primary"
-            >
-              text
-            </v-btn>
-            <v-btn
-              flat
-              color="primary"
-            >
-              text
-            </v-btn>
-          </v-card-actions>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-content>
+                {{ user.name }} {{ user.surname }}
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-content>
+                <div cols="6">
+                  Gender:
+                </div>
+                <div cols="6">
+                  {{ user.Gender }}
+                </div>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-content>
+                {{ user.email }}
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-content>
+                {{ user.phone }}
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-content>
+                {{ user.Registrationdate }}
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-content>
+                {{ user.Access }}
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
         </v-card>
       </v-col>
     </v-row>
@@ -43,7 +64,7 @@ export default {
   name: 'PageUsers',
   components: { Title },
   computed: {
-    ...mapGetters(['allUsers']),
+    ...mapGetters(['getAllUsers']),
   },
   created() {
     this.fetchUsers();
