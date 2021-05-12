@@ -15,6 +15,7 @@ import ReviewCreate from '../components/hotels/ReviewCreate';
 import PageUsers from '../components/PageUsers.vue';
 import PageProfile from '../components/PageProfile';
 import ReservationListing from '../components/rooms/ReservationListing';
+import ReservationDetail from '../components/rooms/ReservationDetail';
 
 const user = store;
 
@@ -105,6 +106,12 @@ const router = new Router({
       path: '/reservations',
       name: 'reservations',
       component: ReservationListing,
+      props: { policy: ['admin', 'user'] },
+    },
+    {
+      path: '/reservationDetail',
+      name: 'reservationDetail',
+      component: ReservationDetail,
       props: { policy: ['admin', 'user'] },
     },
   ],
