@@ -1,20 +1,37 @@
 <template>
   <v-container>
-    <Title title="Profil" />
-    <v-row justify="center">
-      <v-col cols="6">
-        <v-card>
+    <Title title="Rezervace" />
+    <v-row>
+      <v-col
+        v-for="reservation in getReservations"
+        :key="reservation.ReservationID"
+        cols="3"
+      >
+        <v-card @click="redirect(reservation.CustomerID)">
           <v-list>
             <v-list-item>
               <v-row>
                 <v-col cols="6">
-                  Alias:
+                  Cena:
                 </v-col>
                 <v-col
                   cols="6"
                   class="text-right"
                 >
-                  {{ user.Alias }}
+                  {{ reservation.Price }}
+                </v-col>
+              </v-row>
+            </v-list-item>
+            <v-list-item>
+              <v-row>
+                <v-col cols="6">
+                  Počet hostů:
+                </v-col>
+                <v-col
+                  cols="6"
+                  class="text-right"
+                >
+                  {{ reservation.Numberofguests }}
                 </v-col>
               </v-row>
             </v-list-item>
@@ -27,72 +44,59 @@
                   cols="6"
                   class="text-right"
                 >
-                  {{ user.name }} {{ user.surname }}
+                  {{ reservation.contactName }} {{ reservation.surname }}
                 </v-col>
               </v-row>
             </v-list-item>
             <v-list-item>
               <v-row>
                 <v-col cols="6">
-                  Gender:
+                  Od:
                 </v-col>
                 <v-col
                   cols="6"
                   class="text-right"
                 >
-                  {{ user.Gender }}
+                  {{ csLocalizedDateTime(reservation.Startdate) }}
                 </v-col>
               </v-row>
             </v-list-item>
             <v-list-item>
               <v-row>
                 <v-col cols="6">
-                  Email:
+                  Do:
                 </v-col>
                 <v-col
                   cols="6"
                   class="text-right"
                 >
-                  {{ user.email }}
+                  {{ csLocalizedDateTime(reservation.Enddate) }}
                 </v-col>
               </v-row>
             </v-list-item>
             <v-list-item>
               <v-row>
                 <v-col cols="6">
-                  Telefon:
+                  Hotel:
                 </v-col>
                 <v-col
                   cols="6"
                   class="text-right"
                 >
-                  {{ user.phone }}
+                  {{ reservation.name }}
                 </v-col>
               </v-row>
             </v-list-item>
             <v-list-item>
               <v-row>
                 <v-col cols="6">
-                  Registrován od:
+                  Status:
                 </v-col>
                 <v-col
                   cols="6"
-                  class="text-right"
+                  class="text-right font-weight-bold"
                 >
-                  {{ getRegisterDate(user.Registrationdate) }}
-                </v-col>
-              </v-row>
-            </v-list-item>
-            <v-list-item>
-              <v-row>
-                <v-col cols="6">
-                  Oprávnění:
-                </v-col>
-                <v-col
-                  cols="6"
-                  class="text-right"
-                >
-                  {{ user.Access }}
+                  {{ getStatus(reservation.Status) }}
                 </v-col>
               </v-row>
             </v-list-item>
@@ -105,33 +109,39 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import Title from './layout/Title.vue'
+import Title from '../layout/Title.vue';
 
 export default {
-  name: 'PageProfile',
+  name: 'ReservationListing',
   components: { Title },
-  user: {},
   computed: {
-    ...mapGetters(['getSpecificUser', 'loggedUser']),
+    ...mapGetters(['getReservations', 'loggedUser']),
   },
-  created() {
-    this.fetchUsers();
-    this.setUser(this.$route.params.id);
-    // workaround
-    if (this.$route.params.id === this.loggedUser.CustomerID) {
-      this.user = this.loggedUser;
+  async created() {
+    if (this.isAdmin()) {
+      await this.fetchReservations();
     } else {
-      this.user = this.getSpecificUser
+      await this.fetchReservationsByUser(this.loggedUser);
     }
   },
   methods: {
-    ...mapActions(['setUser', 'fetchUsers']),
-    getRegisterDate(date) {
-      return this.csLocalizedDateTime(date)
+    ...mapActions(['fetchReservations', 'fetchReservationsByUser']),
+    isAdmin() {
+      return this.loggedUser ? this.loggedUser.Access === 'admin' : false
+    },
+    getStatus(status) {
+      if (status === 0) {
+        return 'Vytvořena';
+      } if (status === 1) {
+        return 'Zaplacena';
+      } if (status === 2) {
+        return 'Zrušena';
+      }
     },
   },
 }
 </script>
 
 <style>
+
 </style>

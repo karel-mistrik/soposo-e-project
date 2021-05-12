@@ -44,7 +44,7 @@ const actions = {
     return true
   },
   async editHotel({ dispatch, rootState }, hotel) {
-    await api.put(`/api/hotels/${hotel.HotelID}?secret_token=${rootState.auth.token}`, hotel);
+    await api.put(`/api/hotels/${hotel.hotelId}?secret_token=${rootState.auth.token}`, hotel);
     await dispatch('fetchHotels');
     return true;
   },

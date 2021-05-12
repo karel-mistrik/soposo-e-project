@@ -21,7 +21,7 @@ const actions = {
   },
   async deleteReview({ dispatch, rootState }, reviewId) {
     await api.delete(`/api/hotels/reviews/${reviewId}?secret_token=${rootState.auth.token}`);
-    dispatch('fetchReviews', state.hotel.HotelID)
+    dispatch('fetchReviews', rootState.hotels.hotel.HotelID)
   },
 };
 

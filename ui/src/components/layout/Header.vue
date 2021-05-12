@@ -113,7 +113,7 @@
         <v-divider />
 
         <v-list-item
-          v-if="isAdmin"
+          :to="{ name: 'reservations' }"
         >
           <v-list-item-avatar>
             <v-icon size="25">
@@ -145,7 +145,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import mixins from '../../mixin/mixins';
 
 export default {
@@ -157,13 +157,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['loggedUser']),
+    ...mapGetters(['loggedUser', 'getSpecificUser']),
     isAdmin() {
       return this.loggedUser ? this.loggedUser.Access === 'admin' : false
     },
   },
   created() {
-    console.log(this.currentUser)
   },
   methods: {
     logout() {
@@ -174,6 +173,7 @@ export default {
     redirect(id) {
       this.$router.push({ name: 'profile', params: { id } });
     },
+    ...mapActions(['setUser']),
   },
 };
 </script>
