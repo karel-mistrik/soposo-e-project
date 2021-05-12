@@ -48,7 +48,7 @@ Reservation.getAll = result => {
 	sql.query(
 		`
 		select reservation.Enddate, reservation.Startdate, reservation.Numberofguests, reservation.Price, reservation.Status,
-		contact.name, contact.surname, contact.email, roomtype.description, Payment.type, hotel.name, address.street, address.apt, address.city 
+		contact.name as contactName, contact.surname, contact.email, roomtype.description, Payment.type, hotel.name, address.street, address.apt, address.city 
 		from reservation 
 		join customer on reservation.CustomerID = customer.CustomerID
 		join contact on customer.contactID = contact.contactID
