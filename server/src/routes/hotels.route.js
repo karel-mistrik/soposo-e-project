@@ -5,6 +5,7 @@ const address = require('../controllers/address.controller.js')
 const review = require('../controllers/review.controller.js')
 const moment = require('moment')
 const multer = require('multer')
+const base64Img = require('base64-img');
 
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
@@ -31,14 +32,22 @@ const upload = multer({
 	fileFilter: fileFilter
 })
 
-router.post('/', upload.single('hotelImage'), async (req, res) => {
+router.post('/', async (req, res) => {
 	try {
+
+		const { preview } = req.body;
+
 		const addressResponse = await address.create(req)
 
-		req.file = ''
+		base64Img.img(preview, '../../uploads/', Date.now(), function(err, filepath) {
+			const pathArr = filepath.split('/')
+			const fileName = pathArr[pathArr.length - 1];
+
+			console.log(fileName)
+		});
+
 		let formData = {
 			addressId: addressResponse.id,
-			hotelImage: req.file.path,
 			...req.body
 		}
 
@@ -50,7 +59,7 @@ router.post('/', upload.single('hotelImage'), async (req, res) => {
 		}
 	} catch {
 		res.status(500).send({
-			message: 'Some error occurred while creating the Customer.'
+			message: 'Some error occurred while creating the Hotel.'
 		})
 	}
 })
