@@ -80,7 +80,7 @@ Reservation.findAllByUserId = userId => {
 		join Payment on reservation.PaymentID = Payment.PaymentID
 		join hotel on room.HotelID = hotel.HotelID
 		join address on hotel.AddressID = address.AddressID
-		WHERE CustomerID = ${userId}`,
+		WHERE customer.CustomerID = ${userId}`,
 			(err, res) => {
 				if (err) {
 					reject(err)
