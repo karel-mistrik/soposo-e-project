@@ -6,11 +6,13 @@ const state = {
   user: JSON.parse(localStorage.getItem('user')) || null,
   token: localStorage.getItem('token') || null,
   users: [],
+  specificUser: {},
 };
 
 const getters = {
   loggedUser: (state) => state.user,
   getAllUsers: (state) => state.users,
+  getSpecificUser: (state) => state.specificUser,
 };
 
 const actions = {
@@ -25,6 +27,10 @@ const actions = {
     const response = await api.get(`/api/customers?secret_token=${rootState.auth.token}`);
     commit('setAllUsers', response.data);
   },
+  setUser({ commit }, id) {
+    const user = state.users.filter((user) => user.CustomerID === id);
+    commit('setSpecificUser', user[0]);
+  },
 };
 
 const mutations = {
@@ -36,6 +42,7 @@ const mutations = {
     localStorage.setItem('token', data.token)
     localStorage.setItem('user', JSON.stringify(data.user))
   },
+  setSpecificUser: (state, user) => state.specificUser = user,
 };
 
 export default {

@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="px-4">
     <Title title="Uživatelé" />
     <v-row>
       <v-col
@@ -7,47 +7,98 @@
         :key="user.CustomerID"
         cols="3"
       >
-        <v-card>
+        <v-card @click="redirect(user.CustomerID)">
           <v-list>
             <v-list-item>
-              <v-list-item-content>
-                {{ user.Alias }}
-              </v-list-item-content>
+              <v-row>
+                <v-col cols="6">
+                  Alias:
+                </v-col>
+                <v-col
+                  cols="6"
+                  class="text-right"
+                >
+                  {{ user.Alias }}
+                </v-col>
+              </v-row>
             </v-list-item>
             <v-list-item>
-              <v-list-item-content>
-                {{ user.name }} {{ user.surname }}
-              </v-list-item-content>
+              <v-row>
+                <v-col cols="6">
+                  Jméno:
+                </v-col>
+                <v-col
+                  cols="6"
+                  class="text-right"
+                >
+                  {{ user.name }} {{ user.surname }}
+                </v-col>
+              </v-row>
             </v-list-item>
             <v-list-item>
-              <v-list-item-content>
-                <div cols="6">
+              <v-row>
+                <v-col cols="6">
                   Gender:
-                </div>
-                <div cols="6">
+                </v-col>
+                <v-col
+                  cols="6"
+                  class="text-right"
+                >
                   {{ user.Gender }}
-                </div>
-              </v-list-item-content>
+                </v-col>
+              </v-row>
             </v-list-item>
             <v-list-item>
-              <v-list-item-content>
-                {{ user.email }}
-              </v-list-item-content>
+              <v-row>
+                <v-col cols="6">
+                  Email:
+                </v-col>
+                <v-col
+                  cols="6"
+                  class="text-right"
+                >
+                  {{ user.email }}
+                </v-col>
+              </v-row>
             </v-list-item>
             <v-list-item>
-              <v-list-item-content>
-                {{ user.phone }}
-              </v-list-item-content>
+              <v-row>
+                <v-col cols="6">
+                  Telefon:
+                </v-col>
+                <v-col
+                  cols="6"
+                  class="text-right"
+                >
+                  {{ user.phone }}
+                </v-col>
+              </v-row>
             </v-list-item>
             <v-list-item>
-              <v-list-item-content>
-                {{ user.Registrationdate }}
-              </v-list-item-content>
+              <v-row>
+                <v-col cols="6">
+                  Registrován od:
+                </v-col>
+                <v-col
+                  cols="6"
+                  class="text-right"
+                >
+                  {{ getRegisterDate(user.Registrationdate) }}
+                </v-col>
+              </v-row>
             </v-list-item>
             <v-list-item>
-              <v-list-item-content>
-                {{ user.Access }}
-              </v-list-item-content>
+              <v-row>
+                <v-col cols="6">
+                  Oprávnění:
+                </v-col>
+                <v-col
+                  cols="6"
+                  class="text-right"
+                >
+                  {{ user.Access }}
+                </v-col>
+              </v-row>
             </v-list-item>
           </v-list>
         </v-card>
@@ -71,6 +122,12 @@ export default {
   },
   methods: {
     ...mapActions(['fetchUsers']),
+    redirect(id) {
+      this.$router.push({ name: 'profile', params: { id } });
+    },
+    getRegisterDate(date) {
+      return this.csLocalizedDateTime(date)
+    },
   },
 }
 </script>

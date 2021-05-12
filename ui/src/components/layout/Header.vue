@@ -81,7 +81,7 @@
 
         <v-divider />
 
-        <v-list-item>
+        <v-list-item @click="redirect(loggedUser.CustomerID)">
           <v-list-item-avatar>
             <v-icon size="25">
               mdi-file-find
@@ -89,7 +89,7 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>Recenze</v-list-item-title>
+            <v-list-item-title>Můj profil</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -170,6 +170,9 @@ export default {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       window.location.reload();
+    },
+    redirect(id) {
+      this.$router.push({ name: 'profile', params: { id } });
     },
   },
 };

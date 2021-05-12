@@ -13,7 +13,7 @@ import RoomReservation from '../components/rooms/Reservation';
 import ReservationConfirmation from '../components/rooms/ReservationConfirmation';
 import ReviewCreate from '../components/hotels/ReviewCreate';
 import PageUsers from '../components/PageUsers.vue';
-import PageReviews from '../components/PageReviews.vue';
+import PageProfile from '../components/PageProfile';
 
 const user = store;
 
@@ -95,10 +95,10 @@ const router = new Router({
       props: { policy: ['admin'] },
     },
     {
-      path: '/reviews',
-      name: 'reviews',
-      component: PageReviews,
-      props: { policy: ['admin'] },
+      path: '/profile/:id',
+      name: 'profile',
+      component: PageProfile,
+      props: { policy: ['admin', 'user'] },
     },
   ],
 })
