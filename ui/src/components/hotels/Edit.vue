@@ -163,11 +163,11 @@ export default {
   },
   computed: {
     ...mapGetters(['certainHotel']),
-    ...mapState(['states']),
+    ...mapState(['hotels']),
   },
   created() {
     this.setHotel(this.$route.params.id)
-    this.hotel = { ...this.states.hotel }
+    this.hotel = { ...this.hotels.hotel }
     this.hotel.Country = 'Česká Republika'
     console.log(this.hotel)
   },

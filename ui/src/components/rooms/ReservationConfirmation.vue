@@ -116,7 +116,7 @@ export default {
     await this.setHotel(this.getReservation.hotelId);
   },
   methods: {
-    ...mapState(['states']),
+    ...mapState(['hotels']),
     ...mapActions(['setHotel', 'finishReservation', 'fetchHotels']),
     getStatus(status) {
       if (status === 0) {

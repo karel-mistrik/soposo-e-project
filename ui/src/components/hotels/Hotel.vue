@@ -150,7 +150,7 @@ export default {
   },
   computed: {
     ...mapGetters(['certainHotel', 'allRooms', 'loggedUser']),
-    ...mapState(['states']),
+    ...mapState(['hotels']),
     isAdmin() {
       return this.loggedUser ? this.loggedUser.Access === 'admin' : false
     },
