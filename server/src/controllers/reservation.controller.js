@@ -19,7 +19,7 @@ exports.findAll = (req, res) => {
 	Reservation.getAll((err, data) => {
 		if (err) {
 			res.status(500).send({
-				message: err.message || 'Some error occurred while retrieving reservations.'
+				message: err.message || 'Some error occurred while retrieving reservations.js.'
 			})
 		} else {
 			res.send(data)
@@ -69,7 +69,7 @@ exports.deleteAll = (req, res) => {
 	Reservation.removeAll((err, data) => {
 		if (err)
 			res.status(500).send({
-				message: err.message || 'Some error occurred while removing all reservations.'
+				message: err.message || 'Some error occurred while removing all reservations.js.'
 			})
 		else res.send({ message: `All Reservations were deleted successfully!` })
 	})

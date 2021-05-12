@@ -44,7 +44,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['states']),
+    ...mapState(['hotels']),
   },
   async created() {
     window.addEventListener('resize', this.variableHeight);
@@ -62,7 +62,7 @@ export default {
     randomHotels() {
       const array = []
       for (let i = 0; i < 3; i++) {
-        array.push(this.states.hotels[Math.floor(Math.random() * this.states.hotels.length)])
+        array.push(this.hotels.hotels[Math.floor(Math.random() * this.hotels.hotels.length)])
       }
       this.randomHotelsData = array;
     },

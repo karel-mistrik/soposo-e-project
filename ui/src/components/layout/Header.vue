@@ -74,8 +74,8 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>{{ loggedUser.name }}</v-list-item-title>
-            <v-list-item-subtitle>{{ loggedUser.Access }}</v-list-item-subtitle>
+            <v-list-item-title>{{ loggedUser ? loggedUser.name : '' }}</v-list-item-title>
+            <v-list-item-subtitle>{{ loggedUser ? loggedUser.Access : '' }}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
 

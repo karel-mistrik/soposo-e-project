@@ -102,7 +102,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['states']),
+    ...mapState(['room']),
     dateRangeText() {
       const dates = [this.csLocalizedDateTime(this.reservation.date[0]),
         this.csLocalizedDateTime(this.reservation.date[1])]

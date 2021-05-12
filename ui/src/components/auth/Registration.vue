@@ -128,7 +128,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import api from '@/api';
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 
 export default {
@@ -150,12 +150,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['registerUser']),
-
     async onSubmit() {
       const isValid = await this.$refs.formRegister.validate()
       if (isValid) {
-        await this.registerUser(this.user);
+        await api.post('/register', {
+          ...this.user,
+        });
         await this.$router.push({ name: 'login' })
         await this.saveDetails('Registrován/a!', 'accent', 1000)
       }
