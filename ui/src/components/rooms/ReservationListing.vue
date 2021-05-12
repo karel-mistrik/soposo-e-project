@@ -7,12 +7,12 @@
         :key="reservation.ReservationID"
         cols="3"
       >
-        <v-card @click="redirect(reservation.CustomerID)">
+        <v-card @click="redirect(reservation)">
           <v-list>
             <v-list-item>
               <v-row>
                 <v-col cols="6">
-                  Cena:
+                  <h5 class="title">Cena:</h5>
                 </v-col>
                 <v-col
                   cols="6"
@@ -125,7 +125,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['fetchReservations', 'fetchReservationsByUser']),
+    ...mapActions(['fetchReservations', 'fetchReservationsByUser', 'setReservationDetail']),
     isAdmin() {
       return this.loggedUser ? this.loggedUser.Access === 'admin' : false
     },
@@ -137,6 +137,10 @@ export default {
       } if (status === 2) {
         return 'Zrušena';
       }
+    },
+    redirect(reservation) {
+      this.setReservationDetail(reservation)
+      this.$router.push({ name: 'reservationDetail' })
     },
   },
 }

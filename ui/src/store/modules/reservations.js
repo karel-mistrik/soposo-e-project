@@ -34,6 +34,10 @@ const actions = {
     const response = await api.get(`/api/reservation/user/${user.CustomerID}`);
     commit('setReservations', response.data);
   },
+
+  setReservationDetail({ commit }, reservation) {
+    commit('setReservation', reservation);
+  },
 };
 
 const mutations = {
