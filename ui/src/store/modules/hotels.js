@@ -38,10 +38,14 @@ const actions = {
     await dispatch('fetchHotels');
     return true;
   },
-  setHotel({ commit }, id) {
-    const hotel = state.hotels.filter((hotel) => hotel.HotelID === id);
-    commit('currentHotel', hotel[0]);
-    return true
+  async setHotel({ commit, dispatch }, id) {
+    await dispatch('fetchHotels');
+    if (state.hotels.length !== 0) {
+      const hotel = state.hotels.filter((hotel) => hotel.HotelID.toString() === id.toString());
+      commit('currentHotel', hotel[0]);
+      return true
+    }
+    return false
   },
   async editHotel({ dispatch, rootState }, hotel) {
     await api.put(`/api/hotels/${hotel.hotelId}?secret_token=${rootState.auth.token}`, hotel);

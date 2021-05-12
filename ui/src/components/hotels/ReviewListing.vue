@@ -58,19 +58,25 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'ReviewListing',
+  props: {
+    hotelID: {
+      type: String,
+      default: () => '',
+    },
+  },
   data() {
     return {
     }
   },
   computed: {
-    ...mapGetters(['certainHotel', 'getAllUsers', 'getReviews', 'loggedUser']),
+    ...mapGetters(['getAllUsers', 'getReviews', 'loggedUser']),
     isAdmin() {
       return this.loggedUser ? this.loggedUser.Access === 'admin' : false
     },
   },
-  async created() {
+  async mounted() {
     await this.fetchUsers();
-    await this.fetchReviews(this.certainHotel.HotelID);
+    await this.fetchReviews(this.hotelID);
   },
   methods: {
     ...mapActions(['fetchUsers', 'fetchReviews', 'deleteReview']),

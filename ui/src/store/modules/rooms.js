@@ -5,11 +5,13 @@ import api from '@/api';
 const state = {
   rooms: [],
   room: {},
+  selectedRooms: [],
 };
 
 const getters = {
   certainRoom: (state) => state.room,
   allRooms: (state) => state.rooms,
+  selectedRooms: (state) => state.selectedRooms,
 };
 
 const actions = {
@@ -25,7 +27,7 @@ const actions = {
   },
   fetchRoomsByHotelId({ commit }, id) {
     const hotelRooms = state.rooms.filter((room) => room.HotelID === id);
-    commit('setRooms', hotelRooms);
+    commit('selectedRooms', hotelRooms);
     return true;
   },
   async deleteRoomByHotel({ dispatch }, room) {
@@ -37,6 +39,7 @@ const actions = {
 
 const mutations = {
   setRooms: (state, rooms) => (state.rooms = rooms),
+  selectedRooms: (state, rooms) => (state.selectedRooms = rooms),
   currentRoom: (state, room) => (state.room = room),
 };
 

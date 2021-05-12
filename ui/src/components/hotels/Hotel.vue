@@ -1,6 +1,8 @@
 <template>
   <v-container>
-    <v-row class="justify-center">
+    <v-row
+      class="justify-center"
+    >
       <v-col
         md="8"
         cols="12"
@@ -46,7 +48,7 @@
         </v-row>
         <v-row>
           <v-col
-            v-for="room in allRooms"
+            v-for="room in selectedRooms"
             :key="room.RoomID"
             cols="12"
             md="4"
@@ -111,7 +113,10 @@
             </v-card>
           </v-col>
         </v-row>
-        <ReviewListing />
+        <ReviewListing
+          v-if="certainHotel.HotelID"
+          :hotel-i-d="certainHotel.HotelID.toString()"
+        />
       </v-col>
       <div
         class="add-wrapper"
@@ -149,7 +154,7 @@ export default {
     ReviewListing,
   },
   computed: {
-    ...mapGetters(['certainHotel', 'allRooms', 'loggedUser']),
+    ...mapGetters(['certainHotel', 'selectedRooms', 'loggedUser']),
     ...mapState(['hotels']),
     isAdmin() {
       return this.loggedUser ? this.loggedUser.Access === 'admin' : false
@@ -159,9 +164,11 @@ export default {
 
   },
   async created() {
-    this.setHotel(this.$route.params.id);
-    await this.fetchRooms();
-    await this.fetchRoomsByHotelId(this.$route.params.id);
+    const found = await this.setHotel(this.$route.params.id);
+    if (found) {
+      await this.fetchRooms();
+      await this.fetchRoomsByHotelId(this.$route.params.id);
+    }
   },
   methods: {
     ...mapActions(['setHotel', 'fetchRoomsByHotelId', 'fetchRooms', 'deleteRoomByHotel']),

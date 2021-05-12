@@ -10,6 +10,7 @@
 
 <script>
 import Snackbar from '@/components/layout/Snackbar';
+import { mapActions } from 'vuex';
 import AppBar from './components/layout/Header.vue';
 
 export default {
@@ -19,9 +20,13 @@ export default {
     Snackbar,
     AppBar,
   },
-
-  data: () => ({
-    //
-  }),
+  async created() {
+    await this.fetchHotels()
+    await this.fetchRooms()
+    await this.fetchUsers()
+  },
+  methods: {
+    ...mapActions(['fetchHotels', 'fetchRooms', 'fetchUsers']),
+  },
 };
 </script>
