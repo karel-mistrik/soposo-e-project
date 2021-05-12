@@ -16,13 +16,6 @@ const actions = {
     return response.data
   },
 
-  // eslint-disable-next-line no-unused-vars
-  async getServices({ commit }, hotelID) {
-    // eslint-disable-next-line no-return-await
-    const response = await api.get(`/api/services/hotel/${hotelID}`);
-    return response.data;
-  },
-
   async createReservation({ commit }, reservation) {
     const response = await api.post('/api/reservation/', reservation);
     commit('setReservation', response.data);

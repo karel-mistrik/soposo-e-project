@@ -16,7 +16,6 @@ const actions = {
   async fetchRooms({ commit }) {
     const response = await api.get('/api/rooms');
     commit('setRooms', response.data);
-    // console.log(`rooms${state.rooms}`);
     return response.data;
   },
   setRoom({ commit }, id) {

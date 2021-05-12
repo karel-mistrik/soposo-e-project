@@ -106,6 +106,7 @@ export default {
       if (this.$route.params.restrictedHotels && this.rooms) {
         // eslint-disable-next-line max-len
         const filtredrooms = this.rooms.filter(({ RoomID: id1 }) => !this.$route.params.restrictedHotels.some(({ RoomID: id2 }) => id2 === id1))
+        console.log(filtredrooms.filter((room) => room.Capacity >= this.$route.params.capacity))
         return filtredrooms.filter((room) => room.Capacity >= this.$route.params.capacity)
       }
       return this.rooms

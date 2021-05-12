@@ -102,7 +102,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['room']),
+    ...mapState(['rooms']),
     dateRangeText() {
       const dates = [this.csLocalizedDateTime(this.reservation.date[0]),
         this.csLocalizedDateTime(this.reservation.date[1])]
@@ -111,13 +111,13 @@ export default {
   },
   watch: {
     dateRangeText() {
-      this.reservation.price = this.states.room.Price * moment(this.reservation.date[1]).diff(this.reservation.date[0], 'days');
+      this.reservation.price = this.rooms.room.Price * moment(this.reservation.date[1]).diff(this.reservation.date[0], 'days');
       this.blocker = moment(this.reservation.date[1]).diff(this.reservation.date[0], 'days') === 0
     },
   },
   created() {
-    this.reservation.guests = this.states.room.Capacity
-    this.reservation.price = `${this.states.room.Price}`
+    this.reservation.guests = this.rooms.room.Capacity
+    this.reservation.price = `${this.rooms.room.Price}`
     this.blocker = true
   },
   methods: {
@@ -130,9 +130,9 @@ export default {
           endDate: this.reservation.date[1],
           numberOfGuests: this.reservation.guests,
           price: this.reservation.price,
-          customerId: this.states.user.CustomerID,
+          customerId: this.auth.user.CustomerID,
           paymentId: this.reservation.payment,
-          roomId: this.states.room.RoomID,
+          roomId: this.rooms.room.RoomID,
         });
         await this.saveDetails('Rezervace vytvořena!', 'secondary', 2000)
         await this.$router.push({ name: 'reservationConfirmation' });
