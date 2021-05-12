@@ -72,7 +72,11 @@ router.get('/:hotelId', async (req, res) => {
 
 router.put('/:hotelId', async (req, res) => {
 	try {
-		const updateAddress = await address.update(req.body)
+		let formData = {
+			addressId: req.body.AddressID,
+			...req.body
+		}
+		const updateAddress = await address.update(formData)
 		if (updateAddress.updated) {
 			const hotelResponse = await hotels.update(req.body)
 			if (hotelResponse.updated) {
