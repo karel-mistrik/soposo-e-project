@@ -119,9 +119,10 @@
             <img
               :src="hotel.preview"
               alt="card_image"
+              style="max-width: 100%"
             >
             <input
-              class="custom-input"
+              class="pure-material-button-contained"
               type="file"
               accept="image/*"
               @change="handleImage"
@@ -215,7 +216,7 @@ export default {
       if (isValid) {
         await this.createHotel(this.hotel);
         await this.$router.push({ name: 'hotels' })
-        this.saveDetails('Hotel vytvořen!', 'secondary', 2000)
+        await this.saveDetails('Hotel vytvořen!', 'secondary', 2000)
       }
     },
   },

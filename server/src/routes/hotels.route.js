@@ -46,6 +46,9 @@ router.post('/', async (req, res) => {
 			console.log(fileName)
 		});
 
+
+		console.log(preview)
+
 		let formData = {
 			addressId: addressResponse.id,
 			...req.body
@@ -81,6 +84,16 @@ router.get('/:hotelId', async (req, res) => {
 
 router.put('/:hotelId', async (req, res) => {
 	try {
+
+
+		const { preview } = req.body;
+
+		base64Img.img(preview, '../../uploads/', Date.now(), function(err, filepath) {
+			const pathArr = filepath.split('/')
+			const fileName = pathArr[pathArr.length - 1];
+
+		});
+
 		let formData = {
 			addressId: req.body.AddressID,
 			...req.body
