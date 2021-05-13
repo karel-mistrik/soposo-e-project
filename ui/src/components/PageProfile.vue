@@ -2,7 +2,10 @@
   <v-container>
     <Title title="Profil" />
     <v-row justify="center">
-      <v-col cols="6">
+      <v-col
+        cols="12"
+        md="6"
+      >
         <v-card>
           <v-list>
             <v-list-item>

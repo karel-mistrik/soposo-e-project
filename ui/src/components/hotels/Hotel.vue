@@ -81,35 +81,6 @@
                   {{ sumInCrowns(room.Price) }}
                 </span>
               </v-card-subtitle>
-              <div
-                v-if="isAdmin"
-                class="delete-wrapper"
-              >
-                <v-btn
-                  color="secondary"
-                  class="mx-2"
-                  fab
-                  dark
-                  x-small
-                  @click.stop="deleteRoom(room)"
-                >
-                  <v-icon>mdi-delete</v-icon>
-                </v-btn>
-              </div>
-              <div
-                v-if="isAdmin"
-                class="edit-wrapper"
-              >
-                <v-btn
-                  color="accent"
-                  class="mx-2"
-                  fab
-                  dark
-                  x-small
-                >
-                  <v-icon>mdi-circle-edit-outline</v-icon>
-                </v-btn>
-              </div>
             </v-card>
           </v-col>
         </v-row>

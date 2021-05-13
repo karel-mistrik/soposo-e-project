@@ -30,110 +30,91 @@
                     <v-list-item>
                       <v-row>
                         <v-col cols="6">
-                          <h5 class="title">
-                            Cena:
-                          </h5>
+                          Cena:
                         </v-col>
                         <v-col
                           cols="6"
                           class="text-right"
                         >
-                          <span class="subtitle-1">{{ reservation.Price }}</span>
+                          {{ reservation.Price }}
                         </v-col>
                       </v-row>
                     </v-list-item>
                     <v-list-item>
                       <v-row>
                         <v-col cols="6">
-                          <h5 class="title">
-                            Počet hostů:
-                          </h5>
+                          Počet hostů:
                         </v-col>
                         <v-col
                           cols="6"
                           class="text-right"
                         >
-                          <span class="subtitle-1">{{ reservation.Numberofguests }}</span>
+                          {{ reservation.Numberofguests }}
                         </v-col>
                       </v-row>
                     </v-list-item>
                     <v-list-item>
                       <v-row>
                         <v-col cols="6">
-                          <h5 class="title">
-                            Jméno:
-                          </h5>
+                          Jméno:
                         </v-col>
                         <v-col
                           cols="6"
                           class="text-right"
                         >
-                          <span class="subtitle-1">{{ reservation.contactName }}
-                            {{ reservation.surname }}</span>
+                          {{ reservation.surname }}
                         </v-col>
                       </v-row>
                     </v-list-item>
                     <v-list-item>
                       <v-row>
                         <v-col cols="6">
-                          <h5 class="title">
-                            Od:
-                          </h5>
+                          Od:
                         </v-col>
                         <v-col
                           cols="6"
                           class="text-right"
                         >
-                          <span class="subtitle-1">
-                            {{ csLocalizedDateTime(reservation.Startdate) }}
-                          </span>
+                          {{ csLocalizedDateTime(reservation.Startdate) }}
                         </v-col>
                       </v-row>
                     </v-list-item>
                     <v-list-item>
                       <v-row>
                         <v-col cols="6">
-                          <h5 class="title">
-                            Do:
-                          </h5>
+                          Do:
                         </v-col>
                         <v-col
                           cols="6"
                           class="text-right"
                         >
-                          <span class="subtitle-1">
-                            {{ csLocalizedDateTime(reservation.Enddate) }}
-                          </span>
+                          {{ csLocalizedDateTime(reservation.Enddate) }}
                         </v-col>
                       </v-row>
                     </v-list-item>
                     <v-list-item>
                       <v-row>
                         <v-col cols="6">
-                          <h5 class="title">
-                            Hotel:
-                          </h5>
+                          Hotel:
                         </v-col>
                         <v-col
                           cols="6"
                           class="text-right"
                         >
-                          <span class="subtitle-1">{{ reservation.name }}</span>
+                          {{ reservation.name }}
                         </v-col>
                       </v-row>
                     </v-list-item>
                     <v-list-item>
                       <v-row>
                         <v-col cols="6">
-                          <h5 class="title">
-                            Status:
-                          </h5>
+                          Status:
                         </v-col>
                         <v-col
                           cols="6"
                           class="text-right font-weight-bold"
                         >
-                          <span class="subtitle-1">{{ getStatus(reservation.Status) }}</span>
+                          {{ getStatus(reservation.Status) }}
                         </v-col>
                       </v-row>
                     </v-list-item>
