@@ -28,7 +28,7 @@ const actions = {
     commit('setAllUsers', response.data);
   },
   setUser({ commit }, id) {
-    const user = state.users.filter((user) => user.CustomerID === id);
+    const user = state.users.filter((user) => user.CustomerID.toString() === id.toString());
     commit('setSpecificUser', user[0]);
   },
 };

@@ -14,7 +14,7 @@
                   cols="6"
                   class="text-right"
                 >
-                  {{ user.Alias }}
+                  {{ getSpecificUser.Alias }}
                 </v-col>
               </v-row>
             </v-list-item>
@@ -27,7 +27,7 @@
                   cols="6"
                   class="text-right"
                 >
-                  {{ user.name }} {{ user.surname }}
+                  {{ getSpecificUser.name }} {{ getSpecificUser.surname }}
                 </v-col>
               </v-row>
             </v-list-item>
@@ -40,7 +40,7 @@
                   cols="6"
                   class="text-right"
                 >
-                  {{ user.Gender }}
+                  {{ getSpecificUser.Gender }}
                 </v-col>
               </v-row>
             </v-list-item>
@@ -53,7 +53,7 @@
                   cols="6"
                   class="text-right"
                 >
-                  {{ user.email }}
+                  {{ getSpecificUser.email }}
                 </v-col>
               </v-row>
             </v-list-item>
@@ -66,7 +66,7 @@
                   cols="6"
                   class="text-right"
                 >
-                  {{ user.phone }}
+                  {{ getSpecificUser.phone }}
                 </v-col>
               </v-row>
             </v-list-item>
@@ -79,7 +79,7 @@
                   cols="6"
                   class="text-right"
                 >
-                  {{ getRegisterDate(user.Registrationdate) }}
+                  {{ getRegisterDate(getSpecificUser.Registrationdate) }}
                 </v-col>
               </v-row>
             </v-list-item>
@@ -92,7 +92,7 @@
                   cols="6"
                   class="text-right"
                 >
-                  {{ user.Access }}
+                  {{ getSpecificUser.Access }}
                 </v-col>
               </v-row>
             </v-list-item>
@@ -104,7 +104,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 import Title from './layout/Title.vue'
 
 export default {
@@ -112,17 +112,23 @@ export default {
   components: { Title },
   user: {},
   computed: {
+    ...mapState(['specificUser']),
     ...mapGetters(['getSpecificUser', 'loggedUser']),
   },
-  created() {
-    this.fetchUsers();
-    this.setUser(this.$route.params.id);
-    // workaround
-    if (this.$route.params.id === this.loggedUser.CustomerID) {
-      this.user = this.loggedUser;
-    } else {
-      this.user = this.getSpecificUser
-    }
+  watch: {
+    specificUser(value) {
+      console.log(value)
+    },
+  },
+  async created() {
+    await this.fetchUsers();
+    this.setUser(this.$route.params.id)
+    // // workaround
+    // if (this.$route.params.id === this.loggedUser.CustomerID) {
+    //   this.user = this.loggedUser;
+    // } else {
+    //   this.user = this.getSpecificUser
+    // }
   },
   methods: {
     ...mapActions(['setUser', 'fetchUsers']),

@@ -54,29 +54,33 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'ReviewListing',
-  props: {
-    hotelID: {
-      type: String,
-      default: () => '',
-    },
-  },
   data() {
     return {
     }
   },
   computed: {
+    ...mapState(['hotels']),
     ...mapGetters(['getAllUsers', 'getReviews', 'loggedUser']),
     isAdmin() {
       return this.loggedUser ? this.loggedUser.Access === 'admin' : false
     },
   },
+  watch: {
+    'hotels.hotel': {
+      deep: true,
+
+      async handler(value) {
+        await this.fetchReviews(value.HotelID);
+      },
+    },
+  },
   async mounted() {
     await this.fetchUsers();
-    await this.fetchReviews(this.hotelID);
+    await this.fetchReviews(this.hotels.hotel.HotelID);
   },
   methods: {
     ...mapActions(['fetchUsers', 'fetchReviews', 'deleteReview']),
