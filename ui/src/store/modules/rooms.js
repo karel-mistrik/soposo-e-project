@@ -26,7 +26,7 @@ const actions = {
     return true;
   },
   fetchRoomsByHotelId({ commit }, id) {
-    const hotelRooms = state.rooms.filter((room) => room.HotelID === id);
+    const hotelRooms = state.rooms.filter((room) => room.HotelID.toString() === id.toString());
     commit('selectedRooms', hotelRooms);
     return true;
   },
